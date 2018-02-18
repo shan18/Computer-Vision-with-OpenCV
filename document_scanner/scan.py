@@ -1,4 +1,5 @@
 import sys
+import os
 import cv2
 import imutils
 import argparse
@@ -57,7 +58,7 @@ def find_contours(image, edged):
     return screen_cnt
 
 
-def apply_transform_and_threshold(org_image, screen_cnt, ratio):
+def apply_transform_and_threshold(org_image, screen_cnt, ratio, scan_image_name):
     """ Obtain bird's eye view of the image
         by applying perspective transform and threshold.
     """
@@ -71,12 +72,19 @@ def apply_transform_and_threshold(org_image, screen_cnt, ratio):
     cv2.imshow('Scanned', imutils.resize(warped, height=650))
     cv2.waitKey(0)
     cv2.destroyAllWindows()
+    cv2.imwrite(scan_image_name, warped)
 
 
-def main(image):
+def main(image_path):
+    image = cv2.imread(image_path)
+
+    image_filename, image_ext = os.path.splitext(image_path)
+    image_filename += '_scan'
+    scan_image_name = image_filename + image_ext
+
     org_image, resized_image, edged, ratio = detect_edges(image)
     screen_cnt = find_contours(resized_image, edged)
-    apply_transform_and_threshold(org_image, screen_cnt, ratio)
+    apply_transform_and_threshold(org_image, screen_cnt, ratio, scan_image_name)
 
 
 if __name__ == '__main__':
@@ -85,4 +93,4 @@ if __name__ == '__main__':
     ap.add_argument('-i', '--image', help='path to image file')
     args = vars(ap.parse_args())
 
-    main(cv2.imread(args['image']))
+    main(args['image'])
