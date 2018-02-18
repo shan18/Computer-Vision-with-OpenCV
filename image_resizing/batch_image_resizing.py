@@ -1,7 +1,7 @@
 import os
 import cv2
 
-input_path = 'input/sample-images/'
+input_path = 'input/batch-images/'
 output_path = 'output/'
 img_list = os.listdir(input_path)
 for img in img_list:
