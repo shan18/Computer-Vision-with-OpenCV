@@ -11,5 +11,5 @@ This repository contains some projects that I did while learning openCV.
 3. [Webcam Motion Detector](/webcam_motion_detector/):  
     Draws a box around moving objects that appear in the webcam.
 
-4. [Document Scanner](/document_scanner/):
+4. [Document Scanner](/document_scanner/):  
     Scans the documents inside a photograph and converts them into a digital format.
