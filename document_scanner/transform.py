@@ -2,30 +2,52 @@ import cv2
 import argparse
 import numpy as np
 
+from scipy.spatial import distance
 
-def order_points(pts):
+
+def order_points_old(points):
     # Initialize a list of coordinates that will be ordered as following:
     # top-left, top-right, bottom-right and bottom-left
     rect = np.zeros((4, 2), dtype='float32')
 
     # top-left point will have the smallest sum
     # bottom-right point will have the largest sum
-    s = pts.sum(axis=1)
-    rect[0] = pts[np.argmin(s)]
-    rect[2] = pts[np.argmax(s)]
+    s = points.sum(axis=1)
+    rect[0] = points[np.argmin(s)]
+    rect[2] = points[np.argmax(s)]
 
     # top-right point will have the smallest difference
     # bottom-left point will have the largest difference
-    diff = np.diff(pts, axis=1)
-    rect[1] = pts[np.argmin(diff)]
-    rect[3] = pts[np.argmax(diff)]
+    diff = np.diff(points, axis=1)
+    rect[1] = points[np.argmin(diff)]
+    rect[3] = points[np.argmax(diff)]
 
     return rect
 
 
+def order_points_euclidean(points):
+    # sort the points according to x-coordinate
+    x_sorted = points[np.argsort(points[:, 0]), :]
+
+    left_most = x_sorted[:2]
+    right_most = x_sorted[2:]
+
+    # sort the left-most points according to y-coordinate
+    # to get top-left and bottom-left points
+    (tl, bl) = left_most[np.argsort(left_most[:, 1]), :]
+
+    # calculate the euclidean distance of the rightmost points
+    # with the top-left point, the one will the max distance will
+    # be the bottom right point (pythagoras theorem)
+    dist = distance.cdist(tl[np.newaxis], right_most, 'euclidean')[0]
+    (tr, br) = right_most[np.argsort(dist), :]
+
+    return np.array([tl, tr, br, bl], dtype='float32')
+
+
 def four_point_transform(image, points):
     # obtain the points in a ordered fashion
-    rect = order_points(points)
+    rect = order_points_euclidean(points)
     (tl, tr, br, bl) = rect
 
     # calculate width of the new image
