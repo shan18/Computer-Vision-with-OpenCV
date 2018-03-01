@@ -13,3 +13,9 @@ This repository contains some projects that I did while learning openCV.
 
 4. [Document Scanner](/document_scanner/):  
     Scans the documents inside a photograph and converts them into a digital format.
+
+5. [Color Transfer](/color_transfer/):  
+    Transfer colours from the source image to the target image.
+
+6. [Where's Waldo](/finding_waldo/):  
+    Given a image, find waldo.
