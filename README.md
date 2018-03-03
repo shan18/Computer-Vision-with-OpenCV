@@ -25,3 +25,5 @@ This repository contains some projects that I did while learning openCV.
 
 8. [K-means Color Clustering](/kmeans_color_clustering/):  
     Pull out the dominant colors from an image using k-means clustering algorithm.
+
+9. [Image Search Engine](/image_search_engine/)
