@@ -22,3 +22,6 @@ This repository contains some projects that I did while learning openCV.
 
 7. [Where's Waldo](/finding_waldo/):  
     Given a image, find waldo.
+
+8. [K-means Color Clustering](/kmeans_color_clustering/):  
+    Pull out the dominant colors from an image using k-means clustering algorithm.
