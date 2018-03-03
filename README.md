@@ -17,5 +17,8 @@ This repository contains some projects that I did while learning openCV.
 5. [Color Transfer](/color_transfer/):  
     Transfer colours from the source image to the target image.
 
-6. [Where's Waldo](/finding_waldo/):  
+6. [Camshift Object Tracking](/camshift_object_tracking/):  
+    Track object in a video using camshift.
+
+7. [Where's Waldo](/finding_waldo/):  
     Given a image, find waldo.
