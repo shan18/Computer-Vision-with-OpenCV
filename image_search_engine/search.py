@@ -8,8 +8,8 @@ from utils.searcher import Searcher
 
 # construct the argument parser and parse the arguments
 ap = argparse.ArgumentParser()
-ap.add_argument("-d", "--dataset", required=True, help="Path to the directory that contains the indexed images")
-ap.add_argument("-i", "--index", required=True, help="Path to the stored index")
+ap.add_argument('-d', '--dataset', required=True, help='Path to the directory that contains the indexed images')
+ap.add_argument('-i', '--index', required=True, help='Path to the stored index')
 args = vars(ap.parse_args())
 
 # load the index and initialize the searcher
@@ -31,8 +31,8 @@ for (query, query_features) in index.items():
     # we have a total of 25 images in the index, but let's only
     # display the top 10 results; 5 images per montage, with
     # images that are 400x166 pixels
-    montageA = np.zeros((166 * 5, 400, 3), dtype="uint8")
-    montageB = np.zeros((166 * 5, 400, 3), dtype="uint8")
+    montageA = np.zeros((166 * 5, 400, 3), dtype='uint8')
+    montageB = np.zeros((166 * 5, 400, 3), dtype='uint8')
 
     # loop over the top ten results
     for j in range(10):
@@ -40,7 +40,7 @@ for (query, query_features) in index.items():
         (score, image_name) = results[j]
         path = args['dataset'] + '/{name}'.format(name=image_name)
         result = cv2.imread(path)
-        print("\t%d. %s : %.3f" % (j + 1, image_name, score))
+        print('\t%d. %s : %.3f' % (j + 1, image_name, score))
 
         # check to see if the first montage should be used
         if j < 5:
@@ -49,7 +49,7 @@ for (query, query_features) in index.items():
         else:
             montageB[(j - 5) * 166:((j - 5) + 1) * 166, :] = result
 
-        # show the results
-        cv2.imshow("Results 1-5", montageA)
-        cv2.imshow("Results 6-10", montageB)
-        cv2.waitKey(0)
+    # show the results
+    cv2.imshow('Results 1-5', montageA)
+    cv2.imshow('Results 6-10', montageB)
+    cv2.waitKey(0)

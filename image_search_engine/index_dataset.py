@@ -8,8 +8,7 @@ from utils.rgbhistogram import RGBHistogram
 
 # construct the argument parser and parse the arguments
 ap = argparse.ArgumentParser()
-ap.add_argument('-d', '--dataset', required=True,
-                help='Path to the directory that contains the images to be indexed')
+ap.add_argument('-d', '--dataset', required=True, help='Path to the directory that contains the images to be indexed')
 ap.add_argument('-i', '--index', required=True, help='Path to where the computed index will be stored')
 args = vars(ap.parse_args())
 
